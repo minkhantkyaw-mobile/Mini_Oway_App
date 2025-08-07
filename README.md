@@ -1,16 +1,25 @@
-# project_one
+x# Mini Oway App
 
-A new Flutter project.
+The **Mini Oway App** is a lightweight ride-hailing mobile application built with **Flutter** and **Firebase**. It
+connects users with nearby drivers and offers real-time location tracking, distance-based pricing, and a smooth ride
+request experience.
 
-## Getting Started
+## ✨ Features
 
-This project is a starting point for a Flutter application.
+- 🔍 Location search and route display using OpenStreetMap and OSRM
+- 📍 Real-time driver and user location tracking
+- 💸 Distance-based pricing calculation
+- 🧭 Route from driver to user and user to destination
+- 🔔 Ride request system with push notifications and countdown timer (for drivers)
+- 👤 Firebase Authentication (email/password)
+- ☁️ Firebase Firestore for ride and user/driver data management
+- ⚙️ State management with GetX
 
-A few resources to get you started if this is your first Flutter project:
+## 📱 Tech Stack
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- **Flutter** (Frontend)
+- **Firebase** (Auth & Firestore)
+- **GetX** (State Management & Navigation)
+- **Geolocator** (Live location)
+- **FlutterMap** (Map rendering with OpenStreetMap)
+- **OpenRouteService / OSRM** (Route drawing and distance calculation)

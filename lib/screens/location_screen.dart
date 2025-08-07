@@ -116,8 +116,10 @@ class _LocationScreenState extends State<LocationScreen> {
     });
   }
 
-  Future<void> _getCurrentLocationAndCalculatePrice(double destLat,
-      double destLng,) async {
+  Future<void> _getCurrentLocationAndCalculatePrice(
+    double destLat,
+    double destLng,
+  ) async {
     if (_lastDriverLatLng == null) {
       print("🚫 No driver selected yet. Cannot calculate price.");
       return;
@@ -160,8 +162,7 @@ class _LocationScreenState extends State<LocationScreen> {
       );
       if (placemarks.isNotEmpty) {
         final place = placemarks.first;
-        return "${place.street}, ${place.locality}, ${place
-            .administrativeArea}, ${place.country}";
+        return "${place.street}, ${place.locality}, ${place.administrativeArea}, ${place.country}";
       } else {
         return "No address available";
       }
@@ -289,7 +290,10 @@ class _LocationScreenState extends State<LocationScreen> {
                   Row(
                     children: [
                       const Icon(
-                          Icons.directions_car, size: 20, color: Colors.orange),
+                        Icons.directions_car,
+                        size: 20,
+                        color: Colors.orange,
+                      ),
                       const SizedBox(width: 8),
                       Text("Vehicle: $vehicle"),
                     ],
@@ -298,7 +302,10 @@ class _LocationScreenState extends State<LocationScreen> {
                   Row(
                     children: [
                       const Icon(
-                          Icons.check_circle, size: 20, color: Colors.teal),
+                        Icons.check_circle,
+                        size: 20,
+                        color: Colors.teal,
+                      ),
                       const SizedBox(width: 8),
                       Text("Available: ${available ? 'Yes' : 'No'}"),
                     ],
@@ -307,22 +314,30 @@ class _LocationScreenState extends State<LocationScreen> {
                   Row(
                     children: [
                       const Icon(
-                          Icons.location_on, size: 20, color: Colors.red),
+                        Icons.location_on,
+                        size: 20,
+                        color: Colors.red,
+                      ),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
-                            "Destination: ${_selectedAddress ?? 'Not set'}"),
+                          "Destination: ${_selectedAddress ?? 'Not set'}",
+                        ),
                       ),
                     ],
                   ),
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      const Icon(Icons.attach_money, size: 20,
-                          color: Colors.deepPurple),
+                      const Icon(
+                        Icons.attach_money,
+                        size: 20,
+                        color: Colors.deepPurple,
+                      ),
                       const SizedBox(width: 8),
-                      Text("Price: ${totalPrice?.toString() ??
-                          'Calculating...'} MMK"),
+                      Text(
+                        "Price: ${totalPrice?.toString() ?? 'Calculating...'} MMK",
+                      ),
                     ],
                   ),
                   const SizedBox(height: 24),
@@ -337,14 +352,16 @@ class _LocationScreenState extends State<LocationScreen> {
                         icon: const Icon(Icons.cancel),
                         label: const Text("Cancel"),
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.grey),
+                          backgroundColor: Colors.grey,
+                        ),
                       ),
                       ElevatedButton.icon(
                         onPressed: () => phoneCallFunction.makePhoneCall(phone),
                         icon: const Icon(Icons.call),
                         label: const Text("Call"),
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green),
+                          backgroundColor: Colors.green,
+                        ),
                       ),
                       ElevatedButton.icon(
                         onPressed: () => _chooseDestination(),
@@ -355,38 +372,39 @@ class _LocationScreenState extends State<LocationScreen> {
                         onPressed: (totalPrice == null)
                             ? null
                             : () {
-                          Navigator.of(context).pop();
-                          requestRideController.requestRide(
-                            driverId: driverId,
-                            driverName: name,
-                            userId: userId,
-                            userName: userName,
-                            userLat: _userLat!,
-                            userLong: _userLong!,
-                            destinationLat: _selectedDestination?.latitude ??
-                                0.0,
-                            destinationLong: _selectedDestination?.longitude ??
-                                0.0,
-                            totalPrice: totalPrice,
-                            selectedDestination: _selectedAddress ?? '',
-                          );
-                          // Delay slightly to allow bottom sheet pop
-                          Future.delayed(Duration(milliseconds: 1000), () {
-                            final layoutController = Get.find<
-                                MainLayoutController>();
-                            layoutController.selectedIndex.value = 7;
-                            Get.offAll(() => MainLayoutScreen());
-                          });
-                        },
+                                Navigator.of(context).pop();
+                                requestRideController.requestRide(
+                                  driverId: driverId,
+                                  driverName: name,
+                                  userId: userId,
+                                  userName: userName,
+                                  userLat: _userLat!,
+                                  userLong: _userLong!,
+                                  destinationLat:
+                                      _selectedDestination?.latitude ?? 0.0,
+                                  destinationLong:
+                                      _selectedDestination?.longitude ?? 0.0,
+                                  totalPrice: totalPrice,
+                                  selectedDestination: _selectedAddress ?? '',
+                                );
+                                // Delay slightly to allow bottom sheet pop
+                                Future.delayed(
+                                  Duration(milliseconds: 1000),
+                                  () {
+                                    final layoutController =
+                                        Get.find<MainLayoutController>();
+                                    layoutController.selectedIndex.value = 7;
+                                    Get.offAll(() => MainLayoutScreen());
+                                  },
+                                );
+                              },
 
                         icon: const Icon(Icons.send),
                         label: const Text("Request"),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: (totalPrice == null)
                               ? Colors.grey
-                              : Theme
-                              .of(context)
-                              .primaryColor,
+                              : Theme.of(context).primaryColor,
                         ),
                       ),
                     ],
@@ -399,7 +417,6 @@ class _LocationScreenState extends State<LocationScreen> {
       },
     );
   }
-
 
   void _showBottomSheetWithDestination({
     required String driverId,
@@ -465,7 +482,10 @@ class _LocationScreenState extends State<LocationScreen> {
                 Row(
                   children: [
                     const Icon(
-                        Icons.directions_car, size: 20, color: Colors.orange),
+                      Icons.directions_car,
+                      size: 20,
+                      color: Colors.orange,
+                    ),
                     const SizedBox(width: 8),
                     Text("Vehicle: $vehicle"),
                   ],
@@ -474,7 +494,10 @@ class _LocationScreenState extends State<LocationScreen> {
                 Row(
                   children: [
                     const Icon(
-                        Icons.check_circle, size: 20, color: Colors.teal),
+                      Icons.check_circle,
+                      size: 20,
+                      color: Colors.teal,
+                    ),
                     const SizedBox(width: 8),
                     Text("Available: ${available ? 'Yes' : 'No'}"),
                   ],
@@ -486,7 +509,8 @@ class _LocationScreenState extends State<LocationScreen> {
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                          "Destination: ${_selectedAddress ?? 'Not set'}"),
+                        "Destination: ${_selectedAddress ?? 'Not set'}",
+                      ),
                     ),
                   ],
                 ),
@@ -494,10 +518,14 @@ class _LocationScreenState extends State<LocationScreen> {
                 Row(
                   children: [
                     const Icon(
-                        Icons.attach_money, size: 20, color: Colors.deepPurple),
+                      Icons.attach_money,
+                      size: 20,
+                      color: Colors.deepPurple,
+                    ),
                     const SizedBox(width: 8),
-                    Text("Price: ${totalPrice?.toString() ??
-                        'Calculating...'} MMK"),
+                    Text(
+                      "Price: ${totalPrice?.toString() ?? 'Calculating...'} MMK",
+                    ),
                   ],
                 ),
                 const SizedBox(height: 24),
@@ -512,14 +540,16 @@ class _LocationScreenState extends State<LocationScreen> {
                       icon: const Icon(Icons.cancel),
                       label: const Text("Cancel"),
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.grey),
+                        backgroundColor: Colors.grey,
+                      ),
                     ),
                     ElevatedButton.icon(
                       onPressed: () => phoneCallFunction.makePhoneCall(phone),
                       icon: const Icon(Icons.call),
                       label: const Text("Call"),
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green),
+                        backgroundColor: Colors.green,
+                      ),
                     ),
                     ElevatedButton.icon(
                       onPressed: () => _chooseDestination(),
@@ -530,29 +560,28 @@ class _LocationScreenState extends State<LocationScreen> {
                       onPressed: (totalPrice == null)
                           ? null
                           : () {
-                        Navigator.of(context).pop();
-                        requestRideController.requestRide(
-                          driverId: driverId,
-                          driverName: name,
-                          userId: userId,
-                          userName: userName,
-                          userLat: _userLat!,
-                          userLong: _userLong!,
-                          destinationLat: _selectedDestination?.latitude ?? 0.0,
-                          destinationLong: _selectedDestination?.longitude ??
-                              0.0,
-                          totalPrice: totalPrice,
-                          selectedDestination: _selectedAddress ?? '',
-                        );
-                      },
+                              Navigator.of(context).pop();
+                              requestRideController.requestRide(
+                                driverId: driverId,
+                                driverName: name,
+                                userId: userId,
+                                userName: userName,
+                                userLat: _userLat!,
+                                userLong: _userLong!,
+                                destinationLat:
+                                    _selectedDestination?.latitude ?? 0.0,
+                                destinationLong:
+                                    _selectedDestination?.longitude ?? 0.0,
+                                totalPrice: totalPrice,
+                                selectedDestination: _selectedAddress ?? '',
+                              );
+                            },
                       icon: const Icon(Icons.send),
                       label: const Text("Request"),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: (totalPrice == null)
                             ? Colors.grey
-                            : Theme
-                            .of(context)
-                            .primaryColor,
+                            : Theme.of(context).primaryColor,
                       ),
                     ),
                   ],
@@ -564,7 +593,6 @@ class _LocationScreenState extends State<LocationScreen> {
       );
     });
   }
-
 
   void _onRequestPressed({
     required String driverId,
@@ -607,8 +635,7 @@ class _LocationScreenState extends State<LocationScreen> {
 
     final url = Uri.parse(
       "https://api.openrouteservice.org/v2/directions/driving-car"
-          "?api_key=$apiKey&start=${start.longitude},${start.latitude}&end=${end
-          .longitude},${end.latitude}",
+      "?api_key=$apiKey&start=${start.longitude},${start.latitude}&end=${end.longitude},${end.latitude}",
     );
 
     try {
@@ -658,7 +685,7 @@ class _LocationScreenState extends State<LocationScreen> {
           Polyline(
             points: driverToUserRoute,
             strokeWidth: 4.5,
-            color: Col ors.blue,
+            color: Colors.blue,
           ),
           Polyline(
             points: userToDestRoute,
@@ -678,141 +705,19 @@ class _LocationScreenState extends State<LocationScreen> {
         .collection('drivers')
         .snapshots()
         .listen((snapshot) async {
-      final user = FirebaseAuth.instance.currentUser;
-      final userId = user?.uid ?? '';
-      final userDoc = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(userId)
-          .get();
-      final userName = userDoc.data()?['name'] ?? 'Unknown User';
-      final requestRideController = Get.put(RequestRide());
+          final user = FirebaseAuth.instance.currentUser;
+          final userId = user?.uid ?? '';
+          final userDoc = await FirebaseFirestore.instance
+              .collection('users')
+              .doc(userId)
+              .get();
+          final userName = userDoc.data()?['name'] ?? 'Unknown User';
+          final requestRideController = Get.put(RequestRide());
 
-      final userMarker = Marker(
-        point: LatLng(_userLat!, _userLong!),
-        width: 120,
-        height: 60,
-        child: Column(
-          children: [
-            Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 6,
-                vertical: 2,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.circular(4),
-              ),
-              child: const Text(
-                "Your Location",
-                style: TextStyle(color: Colors.white, fontSize: 12),
-              ),
-            ),
-            const Icon(
-              Icons.person_pin_circle,
-              color: Colors.red,
-              size: 30,
-            ),
-          ],
-        ),
-      );
-
-      final List<Marker> updatedMarkers = snapshot.docs
-          .where((doc) => doc.data()['available'] == true)
-          .map((doc) {
-        final data = doc.data();
-        final String driverId = doc.id;
-        final double lat = (data['lat'] is double)
-            ? data['lat']
-            : double.tryParse(data['lat'].toString()) ?? 0.0;
-        final double long = (data['long'] is double)
-            ? data['long']
-            : double.tryParse(data['long'].toString()) ?? 0.0;
-        final String name = data['driver_name'] ?? 'Unknown';
-        final String vehicle = data['vehicle_type'] ?? 'Unknown';
-        final String phone = data['phone'] ?? 'Unknown';
-        final bool available = data['available'] ?? true;
-
-        return Marker(
-          point: LatLng(lat, long),
-          width: 100,
-          height: 80,
-          child: GestureDetector(
-            onTap: () async {
-              // Your existing marker tap logic here...
-
-              _lastDriverId = driverId;
-              _lastDriverName = name;
-              _lastDriverPhone = phone;
-              _lastVehicle = vehicle;
-              _lastAvailable = available;
-              _lastUserId = userId;
-              _lastUserName = userName;
-              _lastDriverLatLng = LatLng(lat, long);
-
-              if (_selectedDestination == null) {
-                _showBottomSheetWithDestination(
-                  driverId: driverId,
-                  name: name,
-                  phone: phone,
-                  vehicle: vehicle,
-                  available: available,
-                  userId: userId,
-                  userName: userName,
-                  driverLatLng: _lastDriverLatLng!,
-                  totalPrice: null,
-                  context: context,
-                  phoneCallFunction: phoneCallFunction,
-                  requestRideController: requestRideController,
-                );
-                return;
-              }
-
-              // Calculate price and update UI same way...
-
-              final Distance distance = const Distance();
-
-              final double driverToUser = distance.as(
-                LengthUnit.Kilometer,
-                _lastDriverLatLng!,
-                LatLng(_userLat!, _userLong!),
-              );
-
-              final double userToDest = distance.as(
-                LengthUnit.Kilometer,
-                LatLng(_userLat!, _userLong!),
-                _selectedDestination!,
-              );
-
-              final double totalDistance = driverToUser + userToDest;
-              final int totalPrice = (totalDistance * 500).round();
-
-              final selectedAddress = await getAddressFromLatLng(
-                _selectedDestination!,
-              );
-
-              if (!mounted)
-                return; // Check mounted to avoid setState after dispose
-
-              setState(() {
-                _selectedAddress = selectedAddress;
-              });
-              await _updateRouteLinesWithORS();
-
-              _showModalBottomSheetWithDestination(
-                driverId: driverId,
-                name: name,
-                phone: phone,
-                vehicle: vehicle,
-                available: available,
-                userId: userId,
-                userName: userName,
-                driverLatLng: _lastDriverLatLng!,
-                totalPrice: totalPrice,
-                context: context,
-                phoneCallFunction: phoneCallFunction,
-                requestRideController: requestRideController,
-              );
-            },
+          final userMarker = Marker(
+            point: LatLng(_userLat!, _userLong!),
+            width: 120,
+            height: 60,
             child: Column(
               children: [
                 Container(
@@ -821,69 +726,191 @@ class _LocationScreenState extends State<LocationScreen> {
                     vertical: 2,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Colors.black,
                     borderRadius: BorderRadius.circular(4),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        blurRadius: 3,
-                      ),
-                    ],
                   ),
-                  child: Text(
-                    vehicle,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                    ),
+                  child: const Text(
+                    "Your Location",
+                    style: TextStyle(color: Colors.white, fontSize: 12),
                   ),
                 ),
                 const Icon(
-                  Icons.location_on_sharp,
-                  color: Color.fromARGB(255, 0, 70, 128),
-                  size: 40,
+                  Icons.person_pin_circle,
+                  color: Colors.red,
+                  size: 30,
                 ),
               ],
             ),
-          ),
-        );
-      })
-          .toList();
+          );
 
-      final List<Marker> tempMarkers = [userMarker, ...updatedMarkers];
+          final List<Marker> updatedMarkers = snapshot.docs
+              .where((doc) => doc.data()['available'] == true)
+              .map((doc) {
+                final data = doc.data();
+                final String driverId = doc.id;
+                final double lat = (data['lat'] is double)
+                    ? data['lat']
+                    : double.tryParse(data['lat'].toString()) ?? 0.0;
+                final double long = (data['long'] is double)
+                    ? data['long']
+                    : double.tryParse(data['long'].toString()) ?? 0.0;
+                final String name = data['driver_name'] ?? 'Unknown';
+                final String vehicle = data['vehicle_type'] ?? 'Unknown';
+                final String phone = data['phone'] ?? 'Unknown';
+                final bool available = data['available'] ?? true;
 
-      if (_selectedDestination != null) {
-        final destinationMarker = Marker(
-          point: _selectedDestination!,
-          width: 140,
-          height: 60,
-          child: Column(
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 6,
-                  vertical: 2,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.green[800],
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: const Text(
-                  "Your Destination",
-                  style: TextStyle(color: Colors.white, fontSize: 12),
-                ),
+                return Marker(
+                  point: LatLng(lat, long),
+                  width: 100,
+                  height: 80,
+                  child: GestureDetector(
+                    onTap: () async {
+                      // Your existing marker tap logic here...
+
+                      _lastDriverId = driverId;
+                      _lastDriverName = name;
+                      _lastDriverPhone = phone;
+                      _lastVehicle = vehicle;
+                      _lastAvailable = available;
+                      _lastUserId = userId;
+                      _lastUserName = userName;
+                      _lastDriverLatLng = LatLng(lat, long);
+
+                      if (_selectedDestination == null) {
+                        _showBottomSheetWithDestination(
+                          driverId: driverId,
+                          name: name,
+                          phone: phone,
+                          vehicle: vehicle,
+                          available: available,
+                          userId: userId,
+                          userName: userName,
+                          driverLatLng: _lastDriverLatLng!,
+                          totalPrice: null,
+                          context: context,
+                          phoneCallFunction: phoneCallFunction,
+                          requestRideController: requestRideController,
+                        );
+                        return;
+                      }
+
+                      // Calculate price and update UI same way...
+
+                      final Distance distance = const Distance();
+
+                      final double driverToUser = distance.as(
+                        LengthUnit.Kilometer,
+                        _lastDriverLatLng!,
+                        LatLng(_userLat!, _userLong!),
+                      );
+
+                      final double userToDest = distance.as(
+                        LengthUnit.Kilometer,
+                        LatLng(_userLat!, _userLong!),
+                        _selectedDestination!,
+                      );
+
+                      final double totalDistance = driverToUser + userToDest;
+                      final int totalPrice = (totalDistance * 500).round();
+
+                      final selectedAddress = await getAddressFromLatLng(
+                        _selectedDestination!,
+                      );
+
+                      if (!mounted)
+                        return; // Check mounted to avoid setState after dispose
+
+                      setState(() {
+                        _selectedAddress = selectedAddress;
+                      });
+                      await _updateRouteLinesWithORS();
+
+                      _showModalBottomSheetWithDestination(
+                        driverId: driverId,
+                        name: name,
+                        phone: phone,
+                        vehicle: vehicle,
+                        available: available,
+                        userId: userId,
+                        userName: userName,
+                        driverLatLng: _lastDriverLatLng!,
+                        totalPrice: totalPrice,
+                        context: context,
+                        phoneCallFunction: phoneCallFunction,
+                        requestRideController: requestRideController,
+                      );
+                    },
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 2,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(4),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.1),
+                                blurRadius: 3,
+                              ),
+                            ],
+                          ),
+                          child: Text(
+                            vehicle,
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                        const Icon(
+                          Icons.location_on_sharp,
+                          color: Color.fromARGB(255, 0, 70, 128),
+                          size: 40,
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              })
+              .toList();
+
+          final List<Marker> tempMarkers = [userMarker, ...updatedMarkers];
+
+          if (_selectedDestination != null) {
+            final destinationMarker = Marker(
+              point: _selectedDestination!,
+              width: 140,
+              height: 60,
+              child: Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 2,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.green[800],
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: const Text(
+                      "Your Destination",
+                      style: TextStyle(color: Colors.white, fontSize: 12),
+                    ),
+                  ),
+                  const Icon(Icons.location_on, color: Colors.green, size: 30),
+                ],
               ),
-              const Icon(Icons.location_on, color: Colors.green, size: 30),
-            ],
-          ),
-        );
-        tempMarkers.add(destinationMarker);
-      }
+            );
+            tempMarkers.add(destinationMarker);
+          }
 
-      setState(() {
-        _markers = tempMarkers;
-      });
-    });
+          setState(() {
+            _markers = tempMarkers;
+          });
+        });
   }
 
   @override
