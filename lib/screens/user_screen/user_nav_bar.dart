@@ -7,6 +7,7 @@ class UserNavBar extends StatefulWidget {
   final int selectedIndex;
   final ValueChanged<int> onItemSelected;
   final Widget child;
+
   const UserNavBar({
     super.key,
     required this.child,
@@ -20,6 +21,7 @@ class UserNavBar extends StatefulWidget {
 
 class _UserNavBarState extends State<UserNavBar> {
   Widget _getTitle(int index) {
+    print("THis is imageurl : ${UserReceiptController.imageUrl.value}");
     switch (index) {
       case 0:
         return Row(
@@ -42,7 +44,8 @@ class _UserNavBarState extends State<UserNavBar> {
                   child: Image.network(
                     UserReceiptController.imageUrl.value.isNotEmpty
                         ? UserReceiptController.imageUrl.value
-                        : 'https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?semt=ais_hybrid&w=740&q=80', // fallback image
+                        : 'https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?semt=ais_hybrid&w=740&q=80',
+                    // fallback image
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -99,7 +102,7 @@ class _UserNavBarState extends State<UserNavBar> {
             DrawerHeader(
               padding: const EdgeInsets.symmetric(vertical: 0),
               decoration: const BoxDecoration(color: Color(0XFFFBF5DE)),
-              child: Obx((){
+              child: Obx(() {
                 return Column(
                   children: [
                     CircleAvatar(
@@ -108,7 +111,6 @@ class _UserNavBarState extends State<UserNavBar> {
                         controller.imageUrl.value.isNotEmpty
                             ? controller.imageUrl.value
                             : 'https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?semt=ais_hybrid&w=740&q=80', // fallback image
-
                       ),
                     ),
                     Text(
@@ -149,7 +151,7 @@ class _UserNavBarState extends State<UserNavBar> {
                     ),
                   ],
                 );
-              })
+              }),
             ),
             buildDrawerItem(index: 0, icon: Icons.home, title: 'Home'),
             buildDrawerItem(index: 1, icon: Icons.drive_eta, title: 'Oway'),
@@ -253,6 +255,4 @@ class _UserNavBarState extends State<UserNavBar> {
       },
     );
   }
-
-
 }

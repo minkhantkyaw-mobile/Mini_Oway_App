@@ -343,8 +343,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           onPressed: () {
                             if (_formSignupKey.currentState!.validate() &&
                                 agreePersonalData) {
-                              String fullName = fullAddressController.text
-                                  .trim();
+                              String fullName = nameController.text.trim();
                               String email = emailController.text.trim();
                               String password = passwordController.text.trim();
                               String phone = phoneController.text.trim();

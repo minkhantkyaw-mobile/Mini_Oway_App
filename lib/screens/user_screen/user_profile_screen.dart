@@ -12,14 +12,17 @@ class UserProfileScreen extends StatefulWidget {
 }
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
+  final TextEditingController nameEditController = TextEditingController();
   int selectedIndex = -1;
   bool isEditSelected = false;
-@override
+
+  @override
   void initState() {
     // TODO: implement initState
-  Get.put(UserDeleteController());
+    Get.put(UserDeleteController());
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(UserProfileController());
@@ -92,13 +95,18 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       ),
                       IconButton(
                         onPressed: () {
+                          nameEditController.text = controller
+                              .name
+                              .value; // Pre-fill with current name
+
                           showDialog(
                             context: context,
                             builder: (context) => AlertDialog(
                               title: const Text("Edit Name"),
-                              content: const TextField(
-                                decoration: InputDecoration(
-                                  hintText: "Enter New name",
+                              content: TextField(
+                                controller: nameEditController,
+                                decoration: const InputDecoration(
+                                  hintText: "Enter new name",
                                 ),
                               ),
                               actions: [
@@ -108,6 +116,13 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                 ),
                                 TextButton(
                                   onPressed: () {
+                                    final newName = nameEditController.text
+                                        .trim();
+                                    if (newName.isNotEmpty) {
+                                      controller.updateUserName(
+                                        newName,
+                                      ); // ✅ Call your controller function
+                                    }
                                     Navigator.pop(context);
                                   },
                                   child: const Text("Save"),
@@ -116,6 +131,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                             ),
                           );
                         },
+
                         icon: Icon(
                           Icons.edit,
                           size: 20,
@@ -253,7 +269,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           ),
         ),
         trailing: trailing,
-        onTap: () async{
+        onTap: () async {
           setState(() {
             selectedIndex = index;
           });
@@ -278,7 +294,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             );
 
             if (confirmed == true) {
-              Get.find<UserLoggoutController>().handleLogout();// 👈 Call your controller's logout method
+              Get.find<UserLoggoutController>()
+                  .handleLogout(); // 👈 Call your controller's logout method
             }
           }
 

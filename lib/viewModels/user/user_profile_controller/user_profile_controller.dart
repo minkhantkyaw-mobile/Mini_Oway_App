@@ -50,6 +50,22 @@ class UserProfileController extends GetxController {
     }
   }
 
+  Future<void> updateUserName(String newName) async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user.uid)
+            .update({'name': newName});
+        name.value = newName;
+        Get.snackbar("✅ Success", "Name updated successfully");
+      }
+    } catch (e) {
+      Get.snackbar("❌ Error", "Failed to update name: $e");
+    }
+  }
+
   // ✅ Pick and upload image
   Future<void> pickAndUploadImage() async {
     try {
